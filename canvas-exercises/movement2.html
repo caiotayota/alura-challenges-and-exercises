@@ -1,0 +1,43 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    function drawCircle(x, y, raio) {
+
+        pincel.fillStyle = 'blue';
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function cleanScreen() {
+
+        pincel.clearRect(0, 0, 600, 400);
+    }
+
+    var x = 20;
+
+    var direction = 1;
+
+    function refreshScreen() {
+
+        cleanScreen();
+
+        if( x > 600) {
+            direction = -1;
+        } else if (x < 0) {
+            direction = 1;
+        } 
+
+        drawCircle(x, 20, 10);
+        x = x + direction;
+    }
+
+    setInterval(refreshScreen, 1);
+
+</script>

@@ -1,0 +1,65 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var screen = document.querySelector('canvas');
+    var pincel = screen.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var x = 20;
+    var y = 20;
+
+    // keyboard codes
+    var left = 37
+    var up = 38
+    var right = 39
+    var down = 40
+
+    var rate = 10;
+
+    function drawCircle(x, y, raio) {
+
+        pincel.fillStyle = 'blue';
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function cleanScreen() {
+
+        pincel.clearRect(0, 0, 600, 400);
+    }
+
+
+    function refreshScreen() {
+
+        cleanScreen();
+        drawCircle(x, y, 10);
+    }
+
+    setInterval(refreshScreen, 20);
+
+    function keyboardReader(evento) {
+
+        if(evento.keyCode == up) {
+
+            y = y - rate;
+
+        } else if (evento.keyCode == down) {
+
+            y = y + rate;
+
+        } else if (evento.keyCode == left) {
+
+            x = x - rate;
+
+        } else if (evento.keyCode == right) {
+
+            x = x + rate;
+        }
+    }
+
+   document.onkeydown = keyboardReader;
+
+</script>

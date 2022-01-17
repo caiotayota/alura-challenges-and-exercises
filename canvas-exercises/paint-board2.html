@@ -1,0 +1,106 @@
+<meta charset="UTF-8">
+
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    function drawSquare(x, y, size, color) {
+
+        pincel.fillStyle = color;
+        pincel.fillRect(x, y, size, size)
+        pincel.fill();
+    }
+
+    function drawCircle(x, y, radius, color) {
+
+        pincel.fillStyle = color;
+        pincel.beginPath();
+        pincel.arc(x, y, radius, 0, 2 * 3.14);
+        pincel.fill();
+
+    }
+
+    function drawColorPallet() {
+
+        drawSquare(xRed, ySquares, squareSizes, 'red');
+        drawSquare(xGreen, ySquares, squareSizes, 'green');
+        drawSquare(xBlue, ySquares, squareSizes, 'blue');
+
+    }
+
+    function dealWithMouseMovments(event) {
+
+        var x = event.pageX - screen.offsetLeft;
+        var y = event.pageY - screen.offsetTop;
+
+        if(draw && canDrawOnScreen(x,y)) {
+
+            drawCircle(x, y, 5, currentColor);
+        }
+    }
+
+    function enableDraw() {
+
+        draw = true;
+    }
+
+    function disableDraw() {
+
+        draw = false;
+    }
+
+    function canDrawOnScreen(x, y) {
+
+         if(x >= 0 && x < 3 * squareSizes && y >= 0 && y < squareSizes) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+function selectColor(event) {
+
+        var x = event.pageX - screen.offsetLeft;
+        var y = event.pageY - screen.offsetTop;
+
+        if (y > ySquares && y < ySquares + squareSizes) {
+
+            if (x > xRed && x < xRed + squareSizes) {
+
+                currentColor = 'red';
+
+            } else if (x > xGreen && x < xGreen + squareSizes) {
+
+                currentColor = 'green';
+
+            } else if (x > xBlue && x < xBlue + squareSizes) {
+
+                currentColor = 'blue';
+            }
+        }
+    }
+
+    var screen = document.querySelector('canvas');
+    var pincel = screen.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var draw = false;
+    var currentColor = 'blue';
+    var xRed = 0;
+    var xGreen  = 50;
+    var xBlue = 100;
+    var ySquares = 0;
+    var squareSizes = 50;
+
+    drawColorPallet();
+
+    screen.onmousemove = dealWithMouseMovments;
+
+    screen.onmousedown = enableDraw;
+
+    screen.onmouseup = disableDraw;
+
+    screen.onclick = selectColor;
+
+</script>

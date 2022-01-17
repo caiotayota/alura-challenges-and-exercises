@@ -1,0 +1,73 @@
+<meta charset="UTF-8">
+
+<canvas width="600" height="400"></canvas>
+<br>
+
+Select a color: <input type="color">
+
+<script>
+	var colorPallete = document.querySelector("input");
+	var screen = document.querySelector("canvas");
+	var pincel = screen.getContext("2d");
+
+	pincel.fillStyle = "lightgrey";
+	pincel.fillRect(0, 0, 600, 400);
+
+	var draw = false;
+	var radius = 10;
+	
+
+	screen.onmousemove = function drawCircle(event) {
+
+		if (draw) {
+		var x = event.pageX - screen.offsetLeft;
+		var y = event.pageY - screen.offsetTop;
+
+		if (event.shiftKey) {
+
+			if (radius < 40) {
+				radius += 10;
+			}
+		}
+
+		if (event.altKey) {
+			if (radius > 10) {
+				radius -= 5;
+			}	
+		}
+
+		pincel.fillStyle = colorPallete.value;
+		pincel.beginPath();
+		pincel.arc(x, y, radius, 0, 2 * 3.14);
+		pincel.fill();
+		
+		}
+		
+		console.log(x + "," + y);
+	}
+
+	screen.onmousedown = function enableDraw() {
+		draw = true;
+	}
+
+
+	screen.onmouseup = function disableDraw() {
+		draw = false;
+	}
+
+
+	function changeColor() {
+
+		indexCurrentColor++;
+
+		if (indexCurrentColor >= colors.length) {
+			indexCurrentColor = 0;
+		}
+
+		return false;
+	}
+
+	screen.oncontextmenu = changeColor;
+
+
+</script>

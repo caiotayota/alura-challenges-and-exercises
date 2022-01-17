@@ -1,0 +1,45 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var screen = document.querySelector('canvas');
+    var pincel = screen.getContext('2d');
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    function drawCircle(x, y, radius, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.beginPath();
+        pincel.arc(x, y, radius, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function cleanScreen() {
+
+        pincel.clearRect(0, 0, 600, 400);
+    }
+
+    var radius = 19;
+
+    var growthRate = 0;
+
+    function refreshScreen() {
+
+        cleanScreen();
+
+        if(radius > 30) {
+            growthRate = -1;
+        } else if (radius < 20) {
+            growthRate = 1;
+        }
+
+        radius = radius + growthRate;
+
+        drawCircle(300, 200, radius, 'blue');
+
+    }
+
+    setInterval(refreshScreen, 20);
+
+</script>
