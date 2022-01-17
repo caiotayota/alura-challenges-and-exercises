@@ -13,7 +13,7 @@
 ![demo-movement-with-keyboard](demo-movement-with-keyboard.gif)
 
 ### Demo: movement2.html
-![demo.movement2](demo.movement2.gif)
+![demo-movement2](demo-movement2.gif)
 
 ### Demo: movement3.html
-![demo.movement3](demo.movement3.gif)
+![demo-movement3](demo-movement3.gif)
